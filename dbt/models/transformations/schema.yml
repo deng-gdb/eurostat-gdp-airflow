@@ -1,0 +1,26 @@
+version: 2
+
+models:
+    - name: unpivoted_nama-10r-2gdp
+      description: >
+        The model perfoms the intermediate processing of the output made by the "stg_nama-10r-2gdp" model.
+        It performes the unpivote operation into the field "value".
+      columns:
+        - name: unit
+          description: Unit of measure.
+        - name: geo
+          description: Geopolitical entity (reporting).
+        - name: year
+          description: Reported year.
+        - name: value
+          description: The target value.
+
+    - name: casted_to_numeric_nama-10r-2gdp
+      description: >
+        The model performs further intermediate processing of the output made by the model "unpivoted_nama-10r-2gdp".
+        It process the field "value", removes all non-digit characters from this field and casts
+        the type of this field to NUMERIC.
+
+    - name: selected_distint_years
+      description: >
+        The model selects all distinct years values from the output made by the model "unpivoted_nama-10r-2gdp".

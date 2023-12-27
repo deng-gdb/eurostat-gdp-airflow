@@ -1,0 +1,6 @@
+version: 2
+
+macros:
+  - name: generate_schema_name
+    description: >
+      This macros overwrite the corresponding standard dbt macros. It creates custom names for the db schemas.

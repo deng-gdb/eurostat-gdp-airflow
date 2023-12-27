@@ -1,0 +1,8 @@
+id,label
+"EUR_HAB","Euro per inhabitant"
+"EUR_HAB_EU27_2020","Euro per inhabitant in percentage of the EU27 (from 2020) average"
+"MIO_EUR","Million euro"
+"MIO_NAC","Million units of national currency"
+"MIO_PPS_EU27_2020","Million purchasing power standards (PPS, EU27 from 2020)"
+"PPS_EU27_2020_HAB","Purchasing power standard (PPS, EU27 from 2020), per inhabitant"
+"PPS_HAB_EU27_2020","Purchasing power standard (PPS, EU27 from 2020), per inhabitant in percentage of the EU27 (from 2020) average"

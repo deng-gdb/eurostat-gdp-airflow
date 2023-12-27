@@ -1,0 +1,53 @@
+version: 2
+
+models:
+    - name: dim_years
+      description: >
+        The model creates the output for the dimension "Years".
+        This dimension represents the reported year.
+      columns:
+        - name: year_id
+          description: Primary key.
+        - name: year
+          description: Displayed value of the reported year.
+
+    - name: dim_regions
+      description: >
+        The model creates the output for the dimension "Regions".
+        This dimension represents the geopolitical entity used in the Eurostat classification
+        for reporting purposes.
+      columns:
+        - name: region_id
+          description: surrogate primary key.
+        - name: eu_commission_region_code
+          description: Inner code of the region used by the European Commission.
+        - name: region_code
+          description: Inner code of the region in accordance with the ISO 3166.
+        - name: region_name
+          description: Displayed value of the region.
+
+    - name: dim_units
+      description: >
+        The model creates the output for the dimension "Units of measure".
+        This dimension represents the units of measure of the target reported value 
+        used in the Eurostat classification for reporting purposes.
+      columns:
+        - name: unit_id
+          description: Surrogate primary key.
+        - name: unit_code
+          description: Inner code of the unit of measure, used in the Eurostat classification.
+        - name: unit_name
+          description: Displayed value of the unit of measure.
+
+    - name: facts_gdp
+      description: >
+        The model creates the output for the facts table in the warehouse.
+      columns:
+        - name: unit_id
+          description: Foreign key for the dimension "Units of measure".
+        - name: region_id
+          description: Foreign key for the dimension "Regions".
+        - name: year_id
+          description: Foreign key for the dimension "Years".
+        - name: value
+          description: the reported value.
