@@ -19,9 +19,6 @@
     - [Install Terraform on local machine](#install-terraform-on-local-machine)
     - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
   - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
-  - [Build Docker image and put it in the Artifact Registry](#build-docker-image-and-put-it-in-the-artifact-registry)  
-  - [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks)
-  - [Create Prefect Deployment](#create-prefect-deployment)
 
 
 # Dataset
