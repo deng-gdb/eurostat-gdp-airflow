@@ -138,20 +138,16 @@ Prerequisites: you should complete all required activities mentioned in the sect
 In order to fulfil Data Ingestion stage do the following:
 
 - On the **local machine**:
-  - Start the corresponding VM instance in the Google Cloud, run the command: `gcloud compute instances start eurostat-gdp-vm-instance`
-  - Connect through SSH to the VM instance:  
-    - `cd ~/.ssh`
-    - `gcloud compute config-ssh`
-    - run the command that is provided in the output of the previous command: `ssh eurostat-gdp-vm-instance.us-east1-b.<your-google-projet-id>`, where <your-google-projet-id> - the value specific for your own environment  
-
-- On the **VM instance**:
-  - Start the Prefect Agent on the VM instance: `prefect agent start -q default`  
-
-- On the **Prefect Cloud**
-  - Login to your Prefect Cloud account
-  - Go to the Deployments tab and find the Deployment `ingest-data/ingest_euro_gdp_data`
-  - Select this deployment and perform `Quick run` action
-
+  - Run Docker Desktop
+  - `cd eurostat-gdp-airflow/airflow`
+  - Run Airflow
+    ```bash
+    docker-compose up -d
+    ```
+  - Access the Airflow GUI by browsing to `localhost:8080`. Username and password are both `airflow` .
+  - Run `ingestion_dag'
+- In your Google Cloud project go to **Cloud Storage** and open the corresponding bucket. You should see the file `eurostat_gdp.csv` there.
+- In your Google Cloud project go to **Big Query** and open the dataset `eurostat_gdp_raw`. You should see the table `nama-10r-2gdp` there.
 
 # Data Transformation and Data Warehouse
 [To Index](#index)
