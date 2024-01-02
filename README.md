@@ -349,7 +349,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - under the section `x-airflow-common:`
   - update the env variable `GOOGLE_APPLICATION_CREDENTIALS`. Replace <google_credentials.json> value by your own credentials file name. It is supposed that your credentials file laid in the /.google folder.
   - update the env variable `GCP_PROJECT_ID`. Replace <gcp_project_id> value by your own project_id value.
-  - update the env variable `GCP_GCS_BUCKET`. Replace <gcs_bucket_name> value by your own gcs_bucket_name value.
+  - update the env variable `GCP_GCS_BUCKET`. Replace <gcs_bucket_name> value by your own gcs_bucket_name value. It is supposed that the bucket name should be in the format: `eurostat_gdp_data_lake_<your_gcp_project_id>`.
 2. Run Docker Desktop
 3. `cd eurostat-gdp-airflow/airflow`
 4. Build the image. It may take several minutes You only need to do this the first time you run Airflow or if you modified the Dockerfile or the `requirements.txt` file.
@@ -412,17 +412,14 @@ The following items could be treated as prerequisites in order to reproduce the 
 [To Index](#index)
 
 Run the following commands:
-- `cd ~/eurostat-gdp/setup/terraform`
+- `cd ~/eurostat-gdp-airflow/terraform`
 - edit a file `terraform.tfvars` - insert your own values for the variables here.
-- edit a file `scripts/instal.sh` - insert your own value for the statement `prefect cloud login -k ...`
 - `terraform init`
 - `terraform plan`
 - `terraform apply`
 - Go to the your GCP dashboard and make sure that the following resourses were created:
   - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
   - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
-  - [VM instances](https://console.cloud.google.com/compute/instances): `eurostat-gdp-vm-instance`
-  - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
 
 ## Build Docker image and put it in the Artifact Registry
