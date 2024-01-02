@@ -80,10 +80,8 @@ The Cloud Infrastructure created by Terraform includes the following items:
 
 - Cloud Storage bucket
 - BigQuery dataset
-- Virtual Machine instance
-- Artifact Registry
 
-Terraform configuration located in the repo by the path: `eurostat-gdp/setup/terraform/`  
+Terraform configuration located in the repo by the path: `eurostat-gdp-airflow/terraform/`  
 To get more details regarding the Terraform configuration files see [the official documentation](https://developer.hashicorp.com/terraform/language/modules/develop/structure).
 
 The Terraform configuration in the project consists of the following files:
