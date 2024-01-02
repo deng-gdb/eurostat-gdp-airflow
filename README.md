@@ -345,18 +345,17 @@ The following items could be treated as prerequisites in order to reproduce the 
 - Go to the your `$HOME` directory.
 - Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git`
 
+### Install Airflow on local machine
 
-### Install Terraform on local machine
-
-- Terraform client installation: [https://www.terraform.io/downloads](https://www.terraform.io/downloads)  
-  - `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
-  - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
-  - `sudo apt update && sudo apt install terraform`
-- Check that Terraform installed successfully. Run: `terraform -version`
+- Go to the `eurostat-gdp-airflow/airflow` and update `docker-compose.yaml` file.
+  - under the section `x-airflow-common:`
+  - update the env variable `GOOGLE_APPLICATION_CREDENTIALS`. Replace <google_credentials.json> value by your own credentials file name.
+  - update the env variable `GCP_PROJECT_ID`. Replace <gcp_project_id> value by your own project_id value.
+  - update the env variable `GCP_PROJECT_ID`. Replace <gcp_project_id> value by your own project_id value.
 
 
-### Install Prefect on local machine
 
+your_
 - Install Prefect and all required dependencies on your local environment:  
   - `cd eurostat-gdp`
   - `pip install -r requirements.txt`  
@@ -369,6 +368,14 @@ The following items could be treated as prerequisites in order to reproduce the 
   - After you generate them, copy the key to a secure location, because that API keys cannot be revealed again in the UI.  
 - Login to Prefect Cloud with this API Key
   - Run the following command: `prefect cloud login -k '<your-api-key>'`  
+
+### Install Terraform on local machine
+
+- Terraform client installation: [https://www.terraform.io/downloads](https://www.terraform.io/downloads)  
+  - `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
+  - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
+  - `sudo apt update && sudo apt install terraform`
+- Check that Terraform installed successfully. Run: `terraform -version`
 
   
 ### Set up SSH access to the Compute Engine VM instances on local machine
