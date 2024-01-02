@@ -8,3 +8,4 @@ env.bak/
 venv.bak/
 logs/
 tmp/
+__pycache__/
