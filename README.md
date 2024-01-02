@@ -145,7 +145,7 @@ In order to fulfil Data Ingestion stage do the following:
     docker-compose up -d
     ```
   - Access the Airflow GUI by browsing to `localhost:8080`. Username and password are both `airflow` .
-  - Run `ingestion_dag'
+  - Run **ingestion_dag**
 - In your Google Cloud project go to **Cloud Storage** and open the corresponding bucket. You should see the file `eurostat_gdp.csv` there.
 - In your Google Cloud project go to **Big Query** and open the dataset `eurostat_gdp_raw`. You should see the table `nama-10r-2gdp` there.
 
