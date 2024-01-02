@@ -20,9 +20,8 @@
   - [Setup local development environment](#setup-local-development-environment)
     - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
     - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
+    - [Install Airflow on local machine](#install-airflow-on-local-machine)
     - [Install Terraform on local machine](#install-terraform-on-local-machine)
-    - [Install Prefect on local machine](#install-prefect-on-local-machine)
-    - [Install Docker on local machine](#install-docker-on-local-machine)
     - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
   - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
   - [Build Docker image and put it in the Artifact Registry](#build-docker-image-and-put-it-in-the-artifact-registry)  
@@ -284,7 +283,7 @@ The dashboard screenshots and visualizations you can find [here.](./notes/dashbo
 The following items could be treated as prerequisites in order to reproduce the project:
 
 - An active [GCP account.](https://cloud.google.com)
-- It is supposed that we are going to connect to GCP VM from the local machine trough the SSH.
+- Installed Docker Desktop
 - (Optional) A SSH client. It is supposed that you are using a Terminal and SSH.
 
 
@@ -338,7 +337,6 @@ The following items could be treated as prerequisites in order to reproduce the 
     - Copy this code and paste it into your terminal window prompt. 
   - Make sure that your project is selected with the command `gcloud config list`
 
-
 ### Clone the project repo on local machine
 
 - Fork this GitHub repository in your GitHub account and clone the forked repo. It is requred because you should perform some customization changes in the code.  
@@ -347,27 +345,27 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 ### Install Airflow on local machine
 
-- Go to the `eurostat-gdp-airflow/airflow` and update `docker-compose.yaml` file.
+1. Go to the `eurostat-gdp-airflow/airflow` and update `docker-compose.yaml` file.
   - under the section `x-airflow-common:`
   - update the env variable `GOOGLE_APPLICATION_CREDENTIALS`. Replace <google_credentials.json> value by your own credentials file name.
   - update the env variable `GCP_PROJECT_ID`. Replace <gcp_project_id> value by your own project_id value.
-  - update the env variable `GCP_PROJECT_ID`. Replace <gcp_project_id> value by your own project_id value.
-
-
-
-your_
-- Install Prefect and all required dependencies on your local environment:  
-  - `cd eurostat-gdp`
-  - `pip install -r requirements.txt`  
-- Create an Prefect API key  
-  In order to enable you to authenticate your local environment to work with Prefect Cloud you need to create an [API key](https://docs.prefect.io/2.13.4/cloud/users/api-keys/) in the Prefect Cloud UI first.
-  - Sign in into your existing Prefect Cloud account.  
-  - Select the account icon at the bottom-left corner of the UI.  
-  - Select **API Keys** -> **Create API Key +**.  
-  - Add a name for the key and an expiration date.  
-  - After you generate them, copy the key to a secure location, because that API keys cannot be revealed again in the UI.  
-- Login to Prefect Cloud with this API Key
-  - Run the following command: `prefect cloud login -k '<your-api-key>'`  
+  - update the env variable `GCP_GCS_BUCKET`. Replace <gcs_bucket_name> value by your own gcs_bucket_name value.
+2. Run Docker Desktop
+3. `cd eurostat-gdp-airflow/airflow`
+4. Build the image. It may take several minutes You only need to do this the first time you run Airflow or if you modified the Dockerfile or the `requirements.txt` file.
+    ```bash
+    docker-compose build
+    ```
+5. Initialize Airflow environment:
+    ```bash
+    docker-compose up airflow-init
+    ```
+6. Run Airflow
+    ```bash
+    docker-compose up -d
+    ```
+7. You may now access the Airflow GUI by browsing to `localhost:8080`. Username and password are both `airflow` .
+>***IMPORTANT***: this is ***NOT*** a production-ready setup! The username and password for Airflow have not been modified in any way; you can find them by searching for `_AIRFLOW_WWW_USER_USERNAME` and `_AIRFLOW_WWW_USER_PASSWORD` inside the `docker-compose.yaml` file.
 
 ### Install Terraform on local machine
 
