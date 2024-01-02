@@ -100,12 +100,6 @@ This file consists of blocks. The syntax of these blocks you can review in the [
 - The block **_provider_** defines the service provider and the project information.
 - The block **_resource "google_storage_bucket"_** defines all required information in order to create Google Cloud storage bucket resource. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket).
 - The block **_resource "google_bigquery_dataset"_** defines all required information in order to create Google BigQuery dataset resource. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset).
-- The block **_resource "google_artifact_registry_repository"_** defines all required information in order to create Google Artifact registry for containers. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/artifact_registry_repository).
-- The block **_resource "google_compute_instance"_** defines all required information in order to create a Google VM instance resource within Compute Emgine. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance).
-  - The values for this block were provided in accordance with with the GCP Free Tier limitations
-  - The value for the argument `image` you can find using the following command, f.e. : `gcloud compute images list | grep ubuntu`
-  - Some considerations regarding the Servive Account for the VM instance you can find in the [official documentation](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account).
-  - Be aware, that after the creation Terraform starts the created VM. So, if you are not going to work further now - don't forget to stop the VM to avoid unnecessary fees.
 
 
 ### variables.tf
@@ -120,11 +114,6 @@ In this project the values for the variables were assigned through the defalt va
 - `variable "data_lake_bucket"`. The value for this variable specified the name of the Cloud Storage bucket that should be created.
 - `variable "raw_bq_dataset"`. The value for this variable specified the name of the BigQuery dataset that should be created.
   - Be aware that this value must be alphanumeric (plus underscores). 
-- `variable "registry_id"`. The value for this variable specified the name of the Artifact repository that should be created.  
-  - Be aware that this value may only contain lowercase letters, numbers, and hyphens, and must begin with a letter and end with a letter or number.
-  - `variable "vm_script_path"`. This variable contains the path to the script which install the required packages on the VM and which should be run on the Virtual Machine compute instance just after of its creation by Terraform.
-  - `variable "ssh_user_name"`. This variable contains the name of the user that will be used to remote exec the script specified in the variable `vm_script_path` trough ssh.
-  - `variable "ssh_private_key_path"`. This variable contains the path to the private ssh key which is used to connect to the VM instance.
 
 
 ### terraform.tfvars
@@ -133,8 +122,6 @@ This file specifies the values for the variables from the file `variables.tf` wh
 
 - `gcp_project_id`.  You can find this value on the your GCP Project Dashboard.
 - `ce_service_account_email`. This value you can find in your GCP console: IAM & Admin -> Service Accounts. Find the account with the name "Compute Engine default service account" and take its email.
-- `ssh_user_name`.  Insert your own value here.
-- `ssh_private_key_path`. Insert the value, which your provided when you created the SSH key pair on your local machine.
 
 The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
 

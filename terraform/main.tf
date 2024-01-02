@@ -46,58 +46,6 @@ resource "google_bigquery_dataset" "dataset" {
   location   = var.region
 }
 
-# Artifact registry for containers
-resource "google_artifact_registry_repository" "artifact-repository" {
-  location      = var.region
-  repository_id = var.registry_id
-  format        = "DOCKER"
-}
-
-# Compute Engine VM Instance
-
-resource "google_compute_instance" "default" {
-  name         = "eurostat-gdp-vm-instance"
-  machine_type = "e2-micro"
-  zone         = "us-east1-b"
-
-  boot_disk {
-    initialize_params {
-      image = "ubuntu-2004-focal-v20230918"
-      size = "30"
-      type="pd-standard"
-      
-    }
-  }
-
-  network_interface {
-    network = "default"
-
-    access_config {
-      # Associate the public IP address to this instance
-      nat_ip = google_compute_address.static.address
-      network_tier = "PREMIUM"
-    }
-  }
-
-  # Connect to the instance via Terraform and remotely execute the script using SSH
-  provisioner "remote-exec" {
-    script = var.vm_script_path
-
-    connection {
-      type        = "ssh"
-      host        = google_compute_address.static.address
-      user        = var.ssh_user_name
-      private_key = file(var.ssh_private_key_path)
-    }
-  }
-
-  service_account {
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = var.ce_service_account_email
-    scopes = ["cloud-platform"]
-  }
-
-}
 
 # Create a public IP address for the google compute instance to utilize
 resource "google_compute_address" "static" {

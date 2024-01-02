@@ -8,4 +8,4 @@ env.bak/
 venv.bak/
 tmp/
 __pycache__/
-.csv
+*.csv
