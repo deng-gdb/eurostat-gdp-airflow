@@ -1,4 +1,5 @@
 apache-airflow-providers-google
+google-auth
 pyarrow
 python-dotenv
 pandas==1.5.2

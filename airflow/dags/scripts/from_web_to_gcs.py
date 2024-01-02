@@ -1,28 +1,21 @@
 from pathlib import Path
 import pandas as pd
-from prefect import flow, task, get_run_logger
-from prefect_gcp.cloud_storage import GcsBucket
-from prefect_gcp import GcpCredentials
 import os.path
 import sys
+from google.cloud import storage
 
 
-@task(name="log-get-table-schema-task")
 def get_table_schema(config_path: str) -> pd.DataFrame:
     """Read the BigQuery table schema from the configuration"""
     
     # read the BigQuery table schema from the configuration
     table_schema_path = os.path.abspath(config_path)
-    #print(table_schema_path)
-    logger = get_run_logger()
-    logger.info(table_schema_path)
+
     df_table_schema = pd.read_json(table_schema_path, orient='records')
-    #df_table_schema = pd.DataFrame()
 
     return df_table_schema
 
 
-@task(retries=3)
 def fetch(dataset_url: str) -> pd.DataFrame:
     """Read data from Eurostat web into pandas DataFrame"""
 
@@ -30,7 +23,6 @@ def fetch(dataset_url: str) -> pd.DataFrame:
     return df
 
 
-@task()
 def transform(df: pd.DataFrame, table_schema: pd.DataFrame) -> pd.DataFrame:
     """Transform input DataFrame accordingly"""
 
@@ -62,7 +54,6 @@ def transform(df: pd.DataFrame, table_schema: pd.DataFrame) -> pd.DataFrame:
     return df_transformed
 
 
-@task()
 def write_local(df: pd.DataFrame, dataset_file_name: str) -> Path:
     """Write DataFrame out locally as csv file"""
 
@@ -71,30 +62,16 @@ def write_local(df: pd.DataFrame, dataset_file_name: str) -> Path:
 
     return path
 
-
-@task()
-def write_to_gcs_data_lake(path: Path) -> None:
-    """Upload local csv file to GCS data lake bucket"""
-    
-    gcs_bucket_block = GcsBucket.load("eurostat-gdp-gcs-bucket")
-    gcs_bucket_block.upload_from_path(from_path=path, to_path=path)
-    
-    return
-       
-
-@flow(log_prints=True)
-def from_web_to_gcs() -> None:
-    """The main ingest function"""
+def download_from_web() -> Path:
+    """Download dataset from Eurostat web and write out locally as csv file"""
 
     dataset_name = "NAMA_10R_2GDP"
     dataset_format = "TSV"
     dataset_url = f"https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/{dataset_name}?format={dataset_format}&compressed=false"
     dataset_file_name = "eurostat_gdp"
-    file_path = '../setup/table_schema.json'
+    file_path = 'table_schema.json'
     config_path = Path(os.path.join(os.path.dirname(__file__), file_path))
-
-    bq_table_name = 'eurostat_gdp_raw.nama-10r-2gdp'
-
+    
     table_schema = get_table_schema(config_path)
     
     # fetch dataset from the eurostat site and put it into dataframe
@@ -103,10 +80,48 @@ def from_web_to_gcs() -> None:
 
     # make the required transformations for the fetched dataframe
     df_transformed = transform(df, table_schema)
-   
+
     # Write DataFrame out locally as csv file
     path = write_local(df_transformed, dataset_file_name)
+  
+    return path
 
-    # Upload local csv file to GCS data lake bucket
-    write_to_gcs_data_lake(path)
+
+def write_to_gcs_data_lake(*args) -> None:
+    """
+    Upload local csv file to GCS data lake bucket.
+
+    Ref: https://cloud.google.com/storage/docs/uploading-objects#storage-upload-object-python
+    :param 0: GCS bucket name
+    :param 1: source path & file-name
+    :param 2: target path & file-name
     
+    """
+    bucket_name = args[0]
+    source_file_name = args[1]
+    target_blob_name = args[2]
+
+    # WORKAROUND to prevent timeout for files > 6 MB on 800 kbps upload speed.
+    # (Ref: https://github.com/googleapis/python-storage/issues/74)
+    storage.blob._MAX_MULTIPART_SIZE = 5 * 1024 * 1024  # 5 MB
+    storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024 * 1024  # 5 MB
+    # End of Workaround
+    
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    
+    blob = bucket.blob(target_blob_name)
+    blob.upload_from_filename(source_file_name)
+ 
+    print(f'bucket_name: {bucket_name}')
+    print(f'source_file: {source_file_name}')
+    print(f'target_blob_name: {target_blob_name}')
+    
+    return
+       
+    
+if __name__ == "__main__":
+    args = sys.argv
+
+    result = globals()[args[1]](*args[2:])
+    print(result)
