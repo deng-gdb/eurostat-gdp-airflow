@@ -17,8 +17,6 @@
 - [Set up project environment](#set-up-project-environment)
   - [Prerequisites](#prerequisites)
   - [Create a GCP project](#create-a-gcp-project)
-  - [Create a Prefect Cloud Account and Workspace](#create-a-prefect-cloud-account-and-workspace)
-  - [Create an Prefect Cloud API key](#create-an-prefect-cloud-api-key)  
   - [Setup local development environment](#setup-local-development-environment)
     - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
     - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
@@ -325,24 +323,6 @@ The following items could be treated as prerequisites in order to reproduce the 
   - [Cloud Storage API](https://console.cloud.google.com/apis/library/storage.googleapis.com)
   - [BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com)
   - [Cloud Run API](https://console.cloud.google.com/apis/library/run.googleapis.com)
-
-
-## Create a Prefect Cloud Account and Workspace
-[To Index](#index)
-
-- [Sign in or register](https://docs.prefect.io/2.13.5/cloud/cloud-quickstart/#sign-in-or-register) a Prefect Cloud account.
-- [Create a workspace](https://docs.prefect.io/2.13.5/cloud/cloud-quickstart/#create-a-workspace) for your account.
-- Create an Prefect API key. In order to enable you to authenticate your local (and other) environment to work with Prefect Cloud you need to create an [API key](https://docs.prefect.io/2.13.4/cloud/users/api-keys/) in the Prefect Cloud UI first. See the next section.
-
-
-### Create an Prefect Cloud API key
-
-- Sign in into your existing Prefect Cloud account.  
-- Select the account icon at the bottom-left corner of the UI.  
-- Select **API Keys** -> **Create API Key +**.  
-- Add a name for the key and an expiration date.  
-- After you generate them, copy the key to a secure location, because that API keys cannot be revealed again in the UI.  
-- In order to log into Prefect Cloud with this API Key you should run the following command: `prefect cloud login -k '<your-api-key>'` 
 
 
 ## Setup local development environment
