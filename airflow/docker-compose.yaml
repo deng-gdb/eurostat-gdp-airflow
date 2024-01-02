@@ -71,16 +71,15 @@ x-airflow-common:
     # WARNING: Use _PIP_ADDITIONAL_REQUIREMENTS option ONLY for a quick checks
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
-    GOOGLE_APPLICATION_CREDENTIALS: /.google/free-tier-project-397608-82d5e09f8a37.json
+    GOOGLE_APPLICATION_CREDENTIALS: /.google/<google_credentials.json>
     AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/.google/free-tier-project-397608-82d5e09f8a37.json'
-    GCP_PROJECT_ID: 'free-tier-project-397608'
-    GCP_GCS_BUCKET: 'eurostat_gdp_data_lake_free-tier-project-397608'
+    GCP_PROJECT_ID: '<gcp_project_id>'
+    GCP_GCS_BUCKET: '<gcs_bucket_name>'
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
-    - ${AIRFLOW_PROJ_DIR:-.}/scripts:/opt/airflow/scripts
     - ~/.google/:/.google:ro
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:

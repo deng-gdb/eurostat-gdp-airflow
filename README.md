@@ -347,7 +347,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 1. Go to the `eurostat-gdp-airflow/airflow` and update `docker-compose.yaml` file.
   - under the section `x-airflow-common:`
-  - update the env variable `GOOGLE_APPLICATION_CREDENTIALS`. Replace <google_credentials.json> value by your own credentials file name.
+  - update the env variable `GOOGLE_APPLICATION_CREDENTIALS`. Replace <google_credentials.json> value by your own credentials file name. It is supposed that your credentials file laid in the /.google folder.
   - update the env variable `GCP_PROJECT_ID`. Replace <gcp_project_id> value by your own project_id value.
   - update the env variable `GCP_GCS_BUCKET`. Replace <gcs_bucket_name> value by your own gcs_bucket_name value.
 2. Run Docker Desktop
