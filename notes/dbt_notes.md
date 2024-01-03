@@ -152,7 +152,7 @@ In the selected GitHub repository create the following branches:
 ## 8. Adjust dbt models
 - Adjust the models from the forked repository providing your own values:
   - `cd eurostat-gdp-airflow/dbt/models/staging`
-  - edit `schema.yaml' - find the value: `database: free-tier-project-397608`. Replace this value by your own Big Query database name.
+  - edit `schema.yaml` - find the value: `database: free-tier-project-397608`. Replace this value by your own Big Query database name.
 
 # The project team workflow.
 - Each developer from the dev team implements changes in the own `dbt-dev` branch. During the implementation process dbt creates the corresponding objects in the DB schema `eurostat_gdp_dev`.
