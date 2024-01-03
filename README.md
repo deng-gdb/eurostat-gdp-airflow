@@ -18,7 +18,8 @@
     - [Install Airflow on local machine](#install-airflow-on-local-machine)
     - [Install Terraform on local machine](#install-terraform-on-local-machine)
     - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
-  - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
+  - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
+  - [Set up dbt environment](#set-up-dbt-environment)
 
 
 # Dataset
@@ -318,4 +319,7 @@ Run the following commands:
   - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
   - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
 
+## Set up dbt environment
+[To Index](#index)
 
+The dbt environment set up details you can find [here.](./notes/dbt_notes.md)
