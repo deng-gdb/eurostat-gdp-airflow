@@ -14,6 +14,7 @@ This document contains details of the implementation of the dbt part of the proj
   - [5. Configure qa environment](#5-configure-qa-environment)
   - [6. Configure prod environment](#6-configure-prod-environment)
   - [7. Configure the dbt project documentation building](#7-configure-the-dbt-project-documentation-building)
+  - [8. Adjust dbt models](#8-adjust-dbt-models)
 - [The project team workflow](#the-project-team-workflow)
 
 # General suppositions.
@@ -147,6 +148,11 @@ In the selected GitHub repository create the following branches:
     ![docs](../img/p15.png)
     
 - The official guidance you can find at this link: [Build and view your docs with dbt Cloud.](https://docs.getdbt.com/docs/collaborate/build-and-view-your-docs#set-up-a-documentation-job)
+
+## 8. Adjust dbt models
+- Adjust the models from the forked repository providing your own values:
+  - `cd eurostat-gdp-airflow/dbt/models/staging`
+  - edit `schema.yaml' - find the value: `database: free-tier-project-397608`. Replace this value by your own Big Query database name.
 
 # The project team workflow.
 - Each developer from the dev team implements changes in the own `dbt-dev` branch. During the implementation process dbt creates the corresponding objects in the DB schema `eurostat_gdp_dev`.
