@@ -136,7 +136,7 @@ Data Ingestion stage comprise the following activities:
 
 Prerequisites: you should complete all required activities mentioned in the section [Set up project environment](#set-up-project-environment).
 
-In order to fulfil Data Ingestion stage do the following:
+In order to fulfill the data ingestion stage, do the following:
 
 - On the **local machine**:
   - Run Docker Desktop
