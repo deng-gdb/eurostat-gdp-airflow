@@ -124,7 +124,7 @@ The guidance regarding the Terraform execution see in the corresponding section:
 
 The Orchestration in the project is implemented using the Airflow. Airflow is running in the Docker container on the local machine.
 
-The Orchestration is implemented only for the Data Ingestion stage. The Orchestration for the Transformation stage (for dbt transformations) is not implemented due to the dbt free pricing plan limitations (API access is not available for the dbt free pricing plan).
+The Orchestration is implemented only for the Data Ingestion stage. The Orchestration for the Transformation stage (for dbt transformations) is not implemented due to the dbt Cloud free pricing plan limitations (API access is not available for the dbt Cloud free pricing plan).
 
 # Data Ingestion and Data Lake
 [To Index](#index)
