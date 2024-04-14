@@ -128,4 +128,4 @@ Run the following commands:
 
 # 4. Set up dbt environment
 
-The dbt environment set up details you can find [here.](./notes/dbt_notes.md)
+The dbt environment set up details you can find [here.](./dbt_notes.md)
