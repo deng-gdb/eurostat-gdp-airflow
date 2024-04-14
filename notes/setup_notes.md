@@ -113,3 +113,19 @@
     - `gcloud compute instances list` - provides a list of your available instances
     - `gcloud compute instances start <instance_name>` - starts your instance
     - `gcloud compute instances stop <instance_name>` - stops your instance
+
+# 3. Create GCP project infrastructure with Terraform
+
+Run the following commands:
+- `cd ~/eurostat-gdp-airflow/terraform`
+- edit a file `terraform.tfvars` - insert your own values for the variables here.
+- `terraform init`
+- `terraform plan`
+- `terraform apply`
+- Go to the your GCP dashboard and make sure that the following resourses were created:
+  - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
+  - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
+
+# 4. Set up dbt environment
+
+The dbt environment set up details you can find [here.](./notes/dbt_notes.md)
