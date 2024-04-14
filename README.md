@@ -101,15 +101,9 @@ The following items could be treated as prerequisites in order to reproduce the 
       - Run **ingestion_dag**
     - In your Google Cloud project go to **Cloud Storage** and open the corresponding bucket. You should see the file `eurostat_gdp.csv` there.
     - In your Google Cloud project go to **Big Query** and open the dataset `eurostat_gdp_raw`. You should see the table `nama-10r-2gdp` there.
+3. Perform data transformation
+   - The details you can find [here](./notes/dbt_notes.md#the-project-team-workflow)
 
-# Data Transformation and Data Warehouse
-[To Index](#index)
-
-The project uses Google BigQuery as a **Data Warehouse**. 
-During the Data Transformation stage the data is carried over through the various transformations from the Raw data schema to the production Data Warehouse schema.  
-This process is implemented using the [dbt Cloud](https://www.getdbt.com/product/dbt-cloud).  
-
-The Data Transformation implementation details, Data Warehouse Modeling guidance and the corresponding workflow you can find [here.](./notes/dbt_notes.md)
 
 
 
