@@ -59,3 +59,9 @@ This file specifies the values for the variables from the file `variables.tf` wh
 - `ce_service_account_email`. This value you can find in your GCP console: IAM & Admin -> Service Accounts. Find the account with the name "Compute Engine default service account" and take its email.
 
 The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
+
+## Orchestration
+
+The Orchestration in the project is implemented using the Airflow. Airflow is running in the Docker container on the local machine.
+
+The Orchestration is implemented only for the **Data Ingestion stage**. The Orchestration for the Transformation stage (for dbt transformations) is not implemented due to the dbt Cloud free pricing plan limitations (API access is not available for the dbt Cloud free pricing plan).
