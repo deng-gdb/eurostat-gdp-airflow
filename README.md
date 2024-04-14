@@ -91,23 +91,16 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 # How to Run This Project
 
-1. Set up project environment. The details you can find in [this note](./notes/setup_notes.md). 
-
-
-
-In order to fulfill the data ingestion stage, do the following:
-
-- On the **local machine**:
-  - Run Docker Desktop
-  - `cd eurostat-gdp-airflow/airflow`
-  - Run Airflow
-    ```bash
-    docker-compose up -d
-    ```
-  - Access the Airflow GUI by browsing to `localhost:8080`. Username and password are both `airflow` .
-  - Run **ingestion_dag**
-- In your Google Cloud project go to **Cloud Storage** and open the corresponding bucket. You should see the file `eurostat_gdp.csv` there.
-- In your Google Cloud project go to **Big Query** and open the dataset `eurostat_gdp_raw`. You should see the table `nama-10r-2gdp` there.
+1. Set up project environment. The details you can find in [this note](./notes/setup_notes.md).
+2. Perform data ingestion:
+   - On the **local machine**:
+      - Run Docker Desktop
+      - `cd eurostat-gdp-airflow/airflow`
+      - Run Airflow: `docker-compose up -d`
+      - Access the Airflow GUI by browsing to `localhost:8080`. Username and password are both `airflow` .
+      - Run **ingestion_dag**
+    - In your Google Cloud project go to **Cloud Storage** and open the corresponding bucket. You should see the file `eurostat_gdp.csv` there.
+    - In your Google Cloud project go to **Big Query** and open the dataset `eurostat_gdp_raw`. You should see the table `nama-10r-2gdp` there.
 
 # Data Transformation and Data Warehouse
 [To Index](#index)
