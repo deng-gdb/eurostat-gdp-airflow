@@ -1,27 +1,3 @@
-# Index
-
-- [Dataset](#dataset)
-- [Technologies and Tools](#technologies-and-tools)
-- [Data Pipeline Architecture](#data-pipeline-architecture)
-  - [Local Machine](#local-machine)
-  - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform)
-  - [Orchestration](#orchestration)
-- [Data Ingestion and Data Lake](#data-ingestion-and-data-lake)
-- [Data Transformation and Data Warehouse](#data-transformation-and-data-warehouse)
-- [Data Visualization](#data-visualization)
-- [Set up project environment](#set-up-project-environment)
-  - [Prerequisites](#prerequisites)
-  - [Create a GCP project](#create-a-gcp-project)
-  - [Setup local development environment](#setup-local-development-environment)
-    - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
-    - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
-    - [Install Airflow on local machine](#install-airflow-on-local-machine)
-    - [Install Terraform on local machine](#install-terraform-on-local-machine)
-    - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
-  - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
-  - [Set up dbt environment](#set-up-dbt-environment)
-
-
 # Overview
 
 This project is related to the processing of the **Eurostat** dataset: `"Gross domestic product (GDP) at current market prices by NUTS 2 regions"`. Eurostat online data code of this dataset: _**NAMA_10R_2GDP**_.
