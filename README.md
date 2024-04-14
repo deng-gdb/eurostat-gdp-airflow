@@ -49,10 +49,25 @@ This project is related to the processing of the **Eurostat** dataset: `"Gross d
 
 ![project-architecture](./img/project_architecture.png)
 
+The data pipeline naturally consists of data ingestion stage, data transformation and visualization stages.
+
+**Data ingestion** stage comprise the following activities:
+- Download the corresponding dataset from the **Eurostat site**.
+- Upload this dataset into the Google Cloud Storage in the **Data lake**.
+- Load this dataset form the Data Lake into the BigQuery dataset in the **Data Warehouse** in the staging schema that contains raw source data.
+
+During the **Data ransformation** stage the data is carried over through the various transformations from the Raw data schema to the production Data Warehouse schema. The project uses Google BigQuery as a **Data Warehouse**. This process is implemented using the [dbt Cloud](https://www.getdbt.com/product/dbt-cloud).  
+
+**Data visualization**.
+- The dashboard used in this project was created in the Google Looker Studio. 
+- The Looker Studio is treated in the project as Front-End visualization tool only. All table joins and other data modeling actions, required for the visualization, were made by the dbt Cloud.
+- Due to the fact that Looker Studio Google Geo charts [doesn't support NUTs regions](https://support.google.com/looker-studio/answer/9843174#country&zippy=%2Cin-this-article), the "Map" page of the dashbord represents data for Country level regions only. The details regarding the NUTs regions you can find [here.](https://ec.europa.eu/eurostat/web/nuts/background)
+- The dashbord is based on the dataset `eurostat_gdp_prod_core.facts_gdp_joined` from the corresponding `DB Prod` Data Warehouse environment.
+- **The restricted (by login/password) link at the dashboard located** [**here.**](https://lookerstudio.google.com/reporting/5cb1caed-76fb-4a2f-bbd3-b9e2bb8269b1) This link is restricted in order to avoid additional charging.
+ 
 The architecture details notes you can find [here.](./notes/architecture_notes.md)
 
 ## Data Visualization
-[To Index](#index)
 
 ![dashboard_params](./img/dashboard_params.jpg)
 
@@ -65,11 +80,6 @@ The dashboard consist of tree pages: Table, Bar, Map.
 **Map**:
 ![Map](./img/dashboard3_1.jpg)
 
-- The dashboard used in this project was created in the Google Looker Studio. 
-- The Looker Studio is treated in the project as Front-End visualization tool only. All table joins and other data modeling actions, required for the visualization, were made by the dbt Cloud.
-- Due to the fact that Looker Studio Google Geo charts [doesn't support NUTs regions](https://support.google.com/looker-studio/answer/9843174#country&zippy=%2Cin-this-article), the "Map" page of the dashbord represents data for Country level regions only. The details regarding the NUTs regions you can find [here.](https://ec.europa.eu/eurostat/web/nuts/background)
-- The dashbord is based on the dataset `eurostat_gdp_prod_core.facts_gdp_joined` from the corresponding `DB Prod` Data Warehouse environment.
-- **The restricted (by login/password) link at the dashboard located** [**here.**](https://lookerstudio.google.com/reporting/5cb1caed-76fb-4a2f-bbd3-b9e2bb8269b1) This link is restricted in order to avoid additional charging.
 
 # Prerequisites
 
@@ -83,15 +93,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 1. Set up project environment. The details you can find in [this note](./notes/setup_notes.md). 
 
-# Data Ingestion and Data Lake
-[To Index](#index)
 
-Data Ingestion stage comprise the following activities:
-- Download the corresponding dataset from the **Eurostat site**.
-- Upload this dataset into the Google Cloud Storage in the **Data lake**.
-- Load this dataset form the Data Lake into the BigQuery dataset in the **Data Warehouse** in the schema that contains raw source data.  
-
-Prerequisites: you should complete all required activities mentioned in the section [Set up project environment](#set-up-project-environment).
 
 In order to fulfill the data ingestion stage, do the following:
 
@@ -118,42 +120,3 @@ The Data Transformation implementation details, Data Warehouse Modeling guidance
 
 
 
-
-# Set up project environment
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-## Create GCP project infrastructure with Terraform
-[To Index](#index)
-
-Run the following commands:
-- `cd ~/eurostat-gdp-airflow/terraform`
-- edit a file `terraform.tfvars` - insert your own values for the variables here.
-- `terraform init`
-- `terraform plan`
-- `terraform apply`
-- Go to the your GCP dashboard and make sure that the following resourses were created:
-  - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
-  - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
-
-## Set up dbt environment
-[To Index](#index)
-
-The dbt environment set up details you can find [here.](./notes/dbt_notes.md)
