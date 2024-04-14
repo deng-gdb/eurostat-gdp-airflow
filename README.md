@@ -22,9 +22,9 @@
   - [Set up dbt environment](#set-up-dbt-environment)
 
 
-# Dataset
+# Overview
 
-- This project is related to the processing of the **Eurostat** dataset: `"Gross domestic product (GDP) at current market prices by NUTS 2 regions"`. Eurostat online data code of this dataset: _**NAMA_10R_2GDP**_.
+This project is related to the processing of the **Eurostat** dataset: `"Gross domestic product (GDP) at current market prices by NUTS 2 regions"`. Eurostat online data code of this dataset: _**NAMA_10R_2GDP**_.
 - The dataset is available at this [link.](https://ec.europa.eu/eurostat/web/products-datasets/-/nama_10r_2gdp)
 - Metadata regarding this dataset you can find [here.](https://ec.europa.eu/eurostat/cache/metadata/en/reg_eco10_esms.htm)
 - API for dataset access description is available at this [link.](https://wikis.ec.europa.eu/display/EUROSTATHELP/Transition+-+from+Eurostat+Bulk+Download+to+API)
@@ -32,7 +32,7 @@
 - The sourse of the Units dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/unit/)
 
 
-# Technologies and Tools
+## Technologies and Tools
 
 - Cloud: Google Cloud Platform
 - Infrastructure as Code: Terraform
@@ -45,7 +45,7 @@
 - Language: Python 
 
 
-# Data Pipeline Architecture
+## Data Architecture
 
 ![project-architecture](./img/project_architecture.png)
 
