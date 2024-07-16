@@ -37,13 +37,13 @@
 
 ## 2.1 Install and setup Google Cloud SDK on local machine
 
-- Download Google Cloud SDK from [this link](https://cloud.google.com/sdk/docs/install-sdk#linux) and install it.
-- Initialize the SDK following [these instructions.](https://cloud.google.com/sdk/docs/install-sdk)
+- Download the Google Cloud SDK from [this link](https://cloud.google.com/sdk/docs/install-sdk#linux) and install it.
+- Initialize the SDK by following [these instructions.](https://cloud.google.com/sdk/docs/install-sdk)
   - Run `gcloud init` from a terminal and follow the instructions:
-    - The system will generate a link and will ask you to go to the link in your browser.
-    - When you will go to this link Google will generate the verification code in gcloud CLI on the machine you want to log into.
+    - The system will generate a link and ask you to go to the link in your browser.
+    - When you go to this link, Google will generate the verification code in gcloud CLI on the machine you want to log into.
     - Copy this code and paste it into your terminal window prompt. 
-  - Make sure that your project is selected with the command `gcloud config list`
+  - Make sure that your project is selected with the command `gcloud config list`.
  
 ## 2.2 Clone the project repo on local machine
 
